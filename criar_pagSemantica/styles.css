@@ -1,0 +1,25 @@
+body {
+    font-family: Arial;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    font-size: 32px;
+    color: #000;
+    text-align: center;
+}
+
+main {
+    margin: 20px auto;
+    padding: 20px;
+}
+
+p {
+    font-size: 18px;
+    color: #333;
+    text-align: left;
+}
+
+a {
+    color: red;
+}
