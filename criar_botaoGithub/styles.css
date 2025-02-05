@@ -1,0 +1,21 @@
+main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.githubButton {
+    border-radius: 12px;
+    padding: 16px;
+    border: none;
+}
+
+.githubButton > a {
+    text-decoration: none;
+    color: black;
+}
+
+.githubButton > a:hover {
+    color: blue;
+}
