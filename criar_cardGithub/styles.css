@@ -1,0 +1,94 @@
+/* Estilo geral para resetar margens e preenchimentos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Configura o corpo da página */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Container principal */
+#mainContainer {
+    
+    width: 552px;
+    height: 191px;
+    background: #2E2E2E;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+/* Caixa 1 dentro do container principal */
+#box1 {
+    
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Caixa filha 1 dentro da Caixa 1 */
+#box1Left {
+   gap: 16px;
+    display: flex;
+    flex-direction: row; /* Alinha elementos na horizontal */
+    justify-content: space-between; /* Separa os elementos */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+#profileContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo da foto */
+.profilePic {
+  width: 100px;
+  height: 100px; 
+  background: #8415EB;
+  border-radius: 999px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Container da informação (nome e email) */
+#infoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left; 
+    gap: 10px;
+}
+
+/* Estilo do nome */
+#infoContainer > h1 {
+    font-size: 24px;
+    color: #FFFFFF;
+    font-weight: 400;
+}
+
+/* Estilo do email */
+#infoContainer > h3 {
+    font-size: 16px;
+    color: #CBCBCB;
+    font-weight: 400;
+}
+
+/* Caixa 2 dentro do container principal */
+#box2 {
+    margin-top: 12px;
+    font-size: 16px;
+    color: #CBCBCB;
+    font-weight: 400;
+    text-align: center;
+}
