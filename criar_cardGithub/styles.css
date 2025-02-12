@@ -15,30 +15,27 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-/* Container principal */
-#mainContainer {
-    
+#container {
     width: 552px;
     height: 191px;
     background: #2E2E2E;
     border-radius: 16px;
     padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-/* Caixa 1 dentro do container principal */
-#box1 {
-    
+#content {
     display: flex;
     justify-content: space-between;
 }
 
-/* Caixa filha 1 dentro da Caixa 1 */
-#box1Left {
-   gap: 16px;
+#content1 {
     display: flex;
-    flex-direction: row; /* Alinha elementos na horizontal */
-    justify-content: space-between; /* Separa os elementos */
-    align-items: center; /* Centraliza verticalmente */
+    flex-direction: row;
+    gap: 11px;
+    align-items: center;
 }
 
 #profileContainer {
@@ -47,48 +44,33 @@ body {
     justify-content: center;
 }
 
-/* Estilo da foto */
 .profilePic {
-  width: 100px;
-  height: 100px; 
-  background: #8415EB;
-  border-radius: 999px; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
+    width: 100px;
+    height: 100px;
+    border-radius: 999px;
+    background-color: #8415EB;
 }
 
-/* Container da informação (nome e email) */
 #infoContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left; 
-    gap: 10px;
+    margin-top: 25px;
+    margin-bottom: 21px;
 }
 
-/* Estilo do nome */
 #infoContainer > h1 {
     font-size: 24px;
     color: #FFFFFF;
     font-weight: 400;
 }
 
-/* Estilo do email */
 #infoContainer > h3 {
     font-size: 16px;
     color: #CBCBCB;
     font-weight: 400;
 }
 
-/* Caixa 2 dentro do container principal */
-#box2 {
-    margin-top: 12px;
+#container > p {
     font-size: 16px;
-    color: #CBCBCB;
     font-weight: 400;
+    color: #CBCBCB;
     text-align: center;
 }
