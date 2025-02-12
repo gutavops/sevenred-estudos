@@ -17,7 +17,6 @@ body {
 
 #container {
     width: 552px;
-    height: 191px;
     background: #2E2E2E;
     border-radius: 16px;
     padding: 24px;
@@ -51,11 +50,6 @@ body {
     background-color: #8415EB;
 }
 
-#infoContainer {
-    margin-top: 25px;
-    margin-bottom: 21px;
-}
-
 #infoContainer > h1 {
     font-size: 24px;
     color: #FFFFFF;
@@ -74,3 +68,11 @@ body {
     color: #CBCBCB;
     text-align: center;
 }
+
+#githubUrl {
+    text-decoration: none;
+}
+#githubUrl:hover {
+    opacity: 0.7;
+}
+
