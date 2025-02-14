@@ -1,0 +1,61 @@
+/* Estilo geral para resetar margens e preenchimentos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Configura o corpo da página */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+#container {
+    width: 552px;
+    background: #2E2E2E;
+    border-radius: 16px;
+    padding: 58px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    gap: 53px;
+}
+
+#content > h1 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+#greenButton {
+    background-color: #2DA23D;
+    padding: 20px 0;
+    border-radius: 6px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+#content > h3 {
+    font-size: 20px;
+    font-weight: 400;
+    color: #FFFFFF;
+    text-align: center;
+}
