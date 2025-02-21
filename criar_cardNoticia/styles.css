@@ -1,0 +1,55 @@
+/* Estilo geral para resetar margens e preenchimentos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Configura o corpo da página */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    font-family: 'Inter', sans-serif;
+}
+
+#container {
+    width: 874px;
+    height: 574px;
+    background: #2E2E2E;
+    border-radius: 16px;
+    padding: 68px 54px;
+    display: flex;
+    gap: 54px;
+}
+
+
+
+.newsImage {
+    width: 329px;
+    height: 437px;
+    object-fit: cover;
+    background-color: #D9D9D9;
+}
+
+article {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+article > h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+article > p {
+    word-break: break-word; /* Quebra palavras longas */
+    font-weight: 600;
+    color: #FFFFFF;
+}
