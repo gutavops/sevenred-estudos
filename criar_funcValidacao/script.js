@@ -11,3 +11,5 @@ function calculadora(number1, number2) {
 }
 
 calculadora(5, 6)
+calculadora(5, 5)
+calculadora(2, 2)
