@@ -1,3 +1,8 @@
+body {
+    display: flex;
+    justify-content: center;  
+}
+
 table {
     width: 50%;
     border-collapse: collapse;
