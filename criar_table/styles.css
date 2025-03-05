@@ -1,6 +1,11 @@
 body {
     display: flex;
     justify-content: center;  
+    gap: 20px;
+}
+
+button {
+    margin-top: 10px;
 }
 
 table {
