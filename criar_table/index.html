@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <form>
+    <form onsubmit="handleNewUser()">
         <label for="name">Name: </label><br>
         <input type="text" id="name"><br>
         <label for="age">Idade: </label><br>
         <input type="number" id="age"><br>
         <label for="email">Email: </label><br>
         <input type="text" id="email"><br>
+        <label for="telephone">Telefone: </label><br>
+        <input type="number" id="telephone"><br>
         <button type="submit">Enviar</button>
     </form>
     <table>
@@ -23,25 +25,12 @@
                 <th>Nome</th>
                 <th>Idade</th>
                 <th>Email</th>
+                <th>Telefone</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Gustavo</td>
-                <td>20</td>
-                <td>gustavo@email.com</td>
-            </tr>
-            <tr>
-                <td>Pedro</td>
-                <td>23</td>
-                <td>pedro@email.com</td>
-            </tr>
-            <tr>
-                <td>Ana</td>
-                <td>28</td>
-                <td>ana@email.com</td>
-            </tr>
         </tbody>
     </table>
+<script src="./script.js"></script>
 </body>
 </html>
