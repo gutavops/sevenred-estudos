@@ -1,0 +1,35 @@
+body {
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+#container {
+    margin-inline: auto; /*Centraliza o comtainer adicionando margins nas laterais*/
+    display: flex;
+    gap: 20px; 
+    padding-inline: 20px;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+#grayBox {
+    background-color: #D9D9D9;
+    min-width: 392px;
+    height: 509px;
+}
+
+p {
+    flex: 1; /*Da Prioridade*/
+}
+
+/* CSS media query dentro de um stylesheet */
+@media (min-width: 600px) {
+    #container {
+        align-items: start;
+        flex-direction: row;
+        max-width: 791px;
+    }
+}
+  
