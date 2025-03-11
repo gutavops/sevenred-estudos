@@ -1,16 +1,17 @@
 body {
     display: flex;
-    justify-content: center;  
+    flex-direction: column; /* Padrão: empilha os elementos (form acima da tabela) */
+    align-items: center;
     gap: 20px;
 }
 
 button {
-    margin-top: 10px;
+    margin-top: 10px; /* Adiciona um espaçamento acima do botão para melhorar a aparência */
 }
 
 table {
-    width: 50%;
-    border-collapse: collapse;
+    width: 50%; /* Define a largura da tabela como 50% da largura da tela */
+    border-collapse: collapse; /* Remove o espaçamento entre as bordas das células */
 }
 th, td {
     border: 1px solid black;
@@ -19,4 +20,14 @@ th, td {
 }
 th {
     background-color: gray;
+}
+
+/* CSS media query dentro de um stylesheet */
+@media (min-width: 600px) {
+    body {
+        flex-direction: row; /* Muda para disposição horizontal (formulário e tabela lado a lado) */
+        align-items: flex-start; /* Alinha os elementos ao topo */
+        justify-content: center;
+        max-width: 791px;
+    }
 }
