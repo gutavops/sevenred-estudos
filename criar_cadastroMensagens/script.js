@@ -2,7 +2,7 @@
 let messages = [];
 
 // Função chamada quando uma nova mensagem é cadastrada
-function handleNewMessage(event) {
+function handleNewMessage() {
     event.preventDefault(); // Previne o comportamento padrão do formulário (recarregar a página)
 
     // Captura o valor do input de mensagem
@@ -22,6 +22,8 @@ function handleNewMessage(event) {
 
     // Adiciona a nova mensagem ao array de mensagens
     messages.push(newMessage);
+    //localStorage.setItem("chave", valor)
+    localStorage.setItem("messageList", JSON.stringify(messages))
 
     // Atualiza a exibição das mensagens na tela
     updateMessageList();
@@ -51,3 +53,16 @@ function updateMessageList() {
         section.appendChild(messageDiv);
     }
 }
+
+function getMessageLocalStorage(){
+    const messageLocalStorage = localStorage.getItem("messageList")
+    const messageList = JSON.parse(messageLocalStorage)
+
+    messageList.forEach((message) => {
+        messages.push(message)
+    });
+
+    updateMessageList()
+}
+
+getMessageLocalStorage()
