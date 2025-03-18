@@ -22,6 +22,8 @@ function handleNewUser() {
     // Adiciona o novo usuário ao array de usuários
     users.push(newUser)
 
+    localStorage.setItem("usersList", JSON.stringify(users));
+
     // Atualiza a tabela exibindo os usuários cadastrados
     addUserToTable()
 
@@ -32,7 +34,7 @@ function handleNewUser() {
     inputTelephone.value = ""
 }
 
-// Função para adicionar os usuários na tabela HTML
+// Percorre o array de usuários, onde cada `user` representa um objeto e `index` é a posição no array
 function addUserToTable() {
     // Seleciona o elemento <tbody> dentro da tabela
     const tbody = document.querySelector("table tbody") 
@@ -41,7 +43,7 @@ function addUserToTable() {
     tbody.innerHTML = ""
 
     // Percorre o array de usuários e adiciona cada um na tabela
-    for(let user of users) {
+    users.forEach((user) => {
         // Cria uma nova linha na tabela
         const tr = document.createElement("tr")
 
@@ -54,9 +56,21 @@ function addUserToTable() {
         `
         // Adiciona a linha criada dentro do <tbody>
         tbody.appendChild(tr)
-    }
-
+    })
     // Exibe no console o conteúdo atualizado do <tbody> (apenas para depuração)
     console.log("tbody: ", tbody)
 
 }
+
+function getUsersLocalStorage(){
+    const userLocalStorage = localStorage.getItem("usersList");
+    const usersList = JSON.parse(userLocalStorage)
+
+    usersList.forEach((user) => {
+        users.push(user)
+    })
+
+    addUserToTable()
+}
+
+getUsersLocalStorage()
