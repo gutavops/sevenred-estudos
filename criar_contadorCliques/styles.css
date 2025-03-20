@@ -1,0 +1,74 @@
+/* Estilo geral para resetar margens e preenchimentos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Inter, sans-serif;
+    background-color: #343434;
+    color: #FFFFFF;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00A955;
+    height: 350px;
+}
+
+/* Seção do contador */
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+    gap: 20px;
+}
+
+.boxCounter {
+    background-color: #D9D9D9;
+    width: 690px;
+    height: 75px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boxCounter p {
+    font-size: 28px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.countButtons {
+    display: flex;
+    gap: 16px;
+}
+
+button {
+    width: 337px;
+    height: 75px;
+    border-radius: 6px;
+    border: none;
+    font-size: 20px;
+    font-weight: 400;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.buttonGray {
+    background-color: #6E6E6E;
+}
+
+.buttonGreen {
+    background-color: #1BA141;
+}
+
+button:hover {
+    opacity: 0.6;
+}
+
+
