@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="cadastro">
+      <h1>Cadastro</h1>
+      <form onsubmit="handleNewUser()">
+        <input type="text" placeholder="Nome" id="name" required/>
+        <input type="text" placeholder="Idade" id="age" required/>
+        <button type="submit">Criar</button>
+      </form>
+    </div>
+    <div class="listagem">
+      <h1>Listagem</h1>
+      <div class="filtros">
+        <i class="ph ph-faders"></i>
+        <button onclick="addFilterAll()">Todos</button>
+        <button onclick="addFilterEighteenPlus()">18+</button>
+        <button onclick="addFilterEighteenUnder()">-18</button>
+        <input type="text" placeholder="Busca por nome" id="searchName"/>
+      </div>
+      <div id="listaPessoas">
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
