@@ -1,0 +1,171 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilização geral */
+body {
+  background-color: #343434;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Barra de pesquisa e botão */
+.searchBar {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 11px;
+}
+
+.searchBar input {
+  width: 100%;
+  height: 56px;
+  border-radius: 6px;
+  border: none;
+  background: #7a7a7a;
+  padding: 10px;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.searchBar button {
+  width: 200px;  
+  border: none;
+  padding-inline: 20px;
+  border-radius: 6px;
+  background: #d9d9d9;
+  color: #000000;
+  font-size: 20px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+/* Tabela */
+
+.tableContainer table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px 1px;
+}
+
+.tableContainer table thead tr th:first-child {
+    border-top-left-radius: 6px;
+}
+
+.tableContainer table thead tr th:last-child {
+    border-top-right-radius: 6px;
+}
+
+/* Cabeçalho da tabela */
+.tableContainer thead {
+  background: #d9d9d9;
+  font-size: 20px;
+  font-weight: 400;
+  color: #000000;
+}
+
+/* Células */
+.tableContainer th,
+td {
+  padding: 20px;
+  text-align: left;
+}
+
+/* Linhas da tabela */
+.tableContainer tbody tr {
+  background: #4e4a4a;
+  color: #ffffff;
+}
+
+/* Ícones */
+.phosphorIcons button {
+  text-decoration: none; /* Remove a linha embaixo */
+  color: #ffffff; /* Mantém a cor branca */
+  font-size: 24px;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+.phosphorIcons button:hover .ph-trash {
+  color: #c52222;
+}
+
+.phosphorIcons button:hover .ph-note-pencil {
+  color: #c3c522;
+}
+
+.modal-content {
+    width: 433px;
+    height: 556px;
+    position: relative;
+    background-color: #343434;
+    color: #FFFFFF;
+}
+/*Remover as bordas*/
+.modal-header {
+    border: none;
+    display: flex;
+    justify-content: center;
+}
+.modal-footer {
+    border: none;
+}
+
+.closeButton {
+    font-size: 24px;
+    color: #FFFFFF;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+.formUser {
+    display: flex;
+    flex-direction: column;
+}
+
+.formUser input {
+    background-color: #888080;
+    border: none;
+    height: 58px;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.formUser label {
+    margin-bottom: 14px;
+    font-size: 20px;
+}
+
+
+.btnCancel {
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid #B9B9B9;
+    color: #FFFFFF;
+    padding-inline: 20px;
+    border-radius: 6px;
+  }
+  
+.btnSave {
+    height: 40px;
+    background-color: #D9D9D9;
+    border: 1px solid #D9D9D9;
+    color: #000000;
+    padding-inline: 20px;
+    border-radius: 6px;
+  }
