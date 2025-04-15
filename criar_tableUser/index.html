@@ -49,12 +49,12 @@
           <!-- Conteúdo da Modal-->
           <div class="modal-body">
             <form class="formUser">
-              <label for="name">Nome</label>
-              <input type="text" id="name" />
-              <label for="email">Email</label>
-              <input type="text" id="email" />
-              <label for="age">Idade</label>
-              <input type="text" id="age" />
+              <label for="newUserName">Nome</label>
+              <input type="text" id="newUserName" />
+              <label for="NewUserEmail">Email</label>
+              <input type="text" id="newUserEmail" />
+              <label for="NewUserAge">Idade</label>
+              <input type="text" id="newUserAge" />
             </form>
           </div>
           <!-- Rodapé da Modal-->
@@ -62,7 +62,7 @@
             <button type="button" class="btnCancel" data-bs-dismiss="modal">
               Cancelar
             </button>
-            <button type="button" class="btnSave">Salvar</button>
+            <button type="button" class="btnSave" onclick="handleNewUser()">Salvar</button>
           </div>
         </div>
       </div>
@@ -106,18 +106,19 @@
             <button type="button" class="btnCancel" data-bs-dismiss="modal">
               Cancelar
             </button>
-            <button type="button" class="btnSave">Salvar Alterações</button>
+            <button type="button" class="btnSave" onclick="handleUpdateUser()">Salvar Alterações</button>
           </div>
         </div>
       </div>
     </div>
     <div class="container">
       <div class="searchBar">
-        <input type="text" />
+        <input type="text" id="searchUser" placeholder="Buscar Usuário"/>
         <button
           type="button"
           data-bs-toggle="modal"
           data-bs-target="#modalNewUser"
+          id="buttonNewUser"
         >
           Novo Usuário
         </button>
@@ -133,23 +134,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Pedro Henrique</td>
-              <td>pedroceolato@gmail.com</td>
-              <td>22</td>
-              <td class="phosphorIcons">
-                <button><i class="ph ph-trash"></i></button>
-                <button
-                  type="button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modalEditUser"
-                >
-                  <i class="ph ph-note-pencil"></i>
-                </button>
-              </td>
-            </tr>
           </tbody>
         </table>
+        <p id="textTableEmpty">Cadastre um novo Usuário !</p>
       </div>
     </div>
     <!-- Adiciona o JavaScript do Bootstrap -->
@@ -158,5 +145,6 @@
       integrity="sha384-YUe2LzesAfftltw+PEaao2tjU/QATaW/rOitAq67e0CT0Zi2VVRL0oC4+gAaeBKu"
       crossorigin="anonymous"
     ></script>
+    <script src="./script.js"></script>
   </body>
 </html>

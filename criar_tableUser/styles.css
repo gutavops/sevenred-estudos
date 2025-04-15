@@ -144,6 +144,7 @@ td {
     border-radius: 6px;
     padding: 10px;
     margin-bottom: 20px;
+    color: #D9D9D9;
 }
 
 .formUser label {
@@ -169,3 +170,14 @@ td {
     padding-inline: 20px;
     border-radius: 6px;
   }
+
+#textTableEmpty {
+  text-align: center;
+  padding-block: 16px;
+  font-size: 20px;
+  color: #D9D9D9;
+}
+
+#searchUserName::placeholder {
+  color: #D9D9D9;
+}
