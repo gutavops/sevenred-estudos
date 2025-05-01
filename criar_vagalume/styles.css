@@ -118,15 +118,22 @@ header {
     color: var(--green);
 }
 
-.card h3 {
+.card a {
     color: var(--green);
     font-size: 24px;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
 }
 .card p {
+    margin-top: 10px;
     color: var(--gray-400);
 }
 
+.icon {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
 /* ========================== DARK MODE =============================================== */
 .dark .theme button .ph-moon {
     display: none;
