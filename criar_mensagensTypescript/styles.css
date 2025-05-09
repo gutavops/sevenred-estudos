@@ -1,0 +1,149 @@
+/* ========================== GERAL =============================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --white: #FFFFFF;
+    --gray-50: #D9D9D9;
+    --gray-100: #595959;
+    --gray-400: #717171;
+    --gray-700: #3A3A3A;
+    --gray-800: #2C2C2C;
+    --gray-900: #1C1C1C;
+    --blue-300: #007FC3;
+    --blue-900: #0025a9;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+}
+
+/* ========================== HEADER =============================================== */
+header {
+    height: 350px;
+    background-color: var(--blue-900);
+    color: var(--white);
+    font-weight: 400;
+    display: flex; /* Usa flexbox para alinhar os elementos */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    margin-bottom: 49px; /* Espaço abaixo do cabeçalho */
+}
+header h1 {
+    font-size: 40px;
+}
+#toggle .ph-moon, .ph-sun{
+    font-size: 24px;
+}
+#toggle .ph-sun {
+    display: none;
+}
+
+#toggle:hover .ph-moon {
+    color: var(--gray-100);
+}
+
+#toggle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    background-color: transparent;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 16px; 
+}
+/* ========================== Message =============================================== */
+main, section {
+    display: flex;
+    flex-direction: column; /* Alinha os elementos verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza os elementos na vertical */
+    gap: 16px;
+}
+form {
+    display: flex; /* Usa flexbox para organizar os elementos horizontalmente */
+    gap: 16px;
+    width: 850px;
+}
+input {
+    font-weight: 400;
+    font-size: 20px;
+    border-radius: 6px;
+    padding: 20px;
+    width: 100%; /* Faz o input ocupar toda a largura disponível no form */
+    border: none; /* Remove a borda padrão */
+    outline: none; /* Remove o contorno ao clicar no input */
+    background-color: var(--gray-50);
+}
+button {
+    border-radius: 6px;
+    background-color: var(--blue-900);
+    color: var(--white);
+    padding: 25px 50px;
+    border: none;
+    cursor: pointer;
+}
+div {
+    display: flex;
+    gap: 16px;
+    width: 850px;
+    min-height: 140px;
+    background-color: var(--gray-50);
+    border-radius: 6px;
+    padding: 16px;
+    box-sizing: border-box;  /* Garante que o padding não aumente o tamanho */
+    justify-content: space-between;
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+div p {
+    margin: 0;
+}
+
+div span {
+    color: var(--blue-300);
+}
+
+/* ========================== DARK MODE =============================================== */
+body.dark {
+    background-color: var(--gray-900);
+}
+
+body.dark header {
+    background-color: var(--gray-800);
+    color: var(--white);
+}
+
+body.dark input {
+    background-color: var(--gray-700);
+    color: var(--gray-50);
+}
+
+body.dark button {
+    background-color: var(--blue-300); /* azul mais claro para contraste */
+    color: var(--white);
+}
+
+body.dark div {
+    background-color: var(--gray-800);
+    color: var(--gray-50);
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
+}
+
+body.dark div span {
+    color: var(--blue-300);
+}
+
+body.dark #toggle .ph-moon {
+    display: none;
+}
+body.dark #toggle .ph-sun {
+    display: inline;
+}
