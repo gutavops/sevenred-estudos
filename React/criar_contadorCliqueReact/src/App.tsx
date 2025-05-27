@@ -1,9 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import { MoonIcon, SunIcon} from '@phosphor-icons/react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(() => {
+    const savedCount = localStorage.getItem('count')
+    return savedCount !== null ? parseInt(savedCount) : 0
+  })
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
 
   const toggleTheme = () => {
@@ -13,6 +16,10 @@ function App() {
       document.body.classList.toggle('dark')
     
   }
+
+  useEffect(() => {
+    localStorage.setItem('count', count.toString())
+  }, [count])
   
   return (
     <>
