@@ -1,4 +1,3 @@
-// src/App.tsx
 import './App.css'
 import { AdviceSection } from './components/AdviceSection'
 
