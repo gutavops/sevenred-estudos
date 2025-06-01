@@ -13,7 +13,7 @@ interface User {
 function App() {
   {/* Modal criar Usuário*/}
   const [show, setShow] = useState(false);
-
+  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -26,9 +26,16 @@ function App() {
   const handleShowEdit = () => setShowEdit(true);
   const handleCloseEdit = () => setShowEdit(false);
 
+  const [editUserId, setEditUserId] = useState<number | null>(null);
+
+  const [editUserName, setEditUserName] = useState("");
+  const [editUserEmail, setEditUserEmail] = useState("");
+  const [editUserPhone, setEditUserPhone] = useState("");
+
   const [userList, setUserList] = useState<User[]>([])
   
-  
+  const [searchUser, setSearchUser] = useState("");
+
   async function createUser() {
     const user = {
       name: newUserName,
@@ -70,10 +77,67 @@ function App() {
   useEffect(() => {
     getUser()
   }, [])
+
+  function handleEditClick(user: User) {
+    setEditUserId(user.id);
+    setEditUserName(user.name);
+    setEditUserEmail(user.email);
+    setEditUserPhone(user.phone);
+    handleShowEdit(); // abre o modal
+  }
+
+  async function updateUser() {
+    const updatedUser = {
+      name: editUserName,
+      email: editUserEmail,
+      phone: editUserPhone,
+    };
+
+    try {
+      const response = await fetch(`http://localhost:8000/api/users/${editUserId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedUser),
+      });
+      if (!response.ok) {
+        throw new Error("Erro ao atualizar usuário");
+      }
+
+      handleCloseEdit()
+      await getUser()
+    } catch (error) {
+      console.error("Erro ao atualizar usuário:", error);
+    }
+  }
+
+  async function deleteUser(id: number) {
+    try {
+      const response = await fetch(`http://localhost:8000/api/users/${id}`, {
+        method: "DELETE",
+      });
+  
+      if (!response.ok) {
+        throw new Error("Erro ao deletar usuário");
+      }
+      
+      await getUser()
+
+    } catch (error) {
+      console.error("Erro ao deletar usuário:", error);
+    }
+  }
+
+  const filteredUsers = userList.filter((user) =>
+    user.name.toLowerCase().includes(searchUser.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchUser.toLowerCase()) ||
+    user.phone.toLowerCase().includes(searchUser.toLowerCase())
+  );
   return (
     <div className="mainContainer">
       <div className="searchBar">
-        <input type="text" placeholder="Buscar Usuário" />
+        <input type="text" placeholder="Buscar Usuário" value={searchUser} onChange={(e) => setSearchUser(e.target.value)}/>
         <button onClick={handleShow}>Novo Usuário</button>
       </div>
 
@@ -88,17 +152,17 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {userList.map((user) => {
+            {filteredUsers.map((user) => {
               return(
             <tr key={user.id}>
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>{user.phone}</td>
               <td>
-                <button>
+                <button onClick={() => deleteUser(user.id)}>
                   <TrashIcon size={24} />
                 </button>
-                <button className="editButton" onClick={handleShowEdit}>
+                <button className="editButton" onClick={() => handleEditClick(user)}>
                   <NotePencilIcon size={24} />
                 </button>
               </td>
@@ -179,6 +243,8 @@ function App() {
                 type="text"
                 placeholder="Digite o nome"
                 id="editUserName"
+                value={editUserName}
+                onChange={(e) => setEditUserName(e.target.value)}
               />
             </Form.Group>
 
@@ -188,6 +254,8 @@ function App() {
                 type="email"
                 placeholder="Digite o email"
                 id="editUserEmail"
+                value={editUserEmail}
+                onChange={(e) => setEditUserEmail(e.target.value)}
               />
             </Form.Group>
 
@@ -197,6 +265,8 @@ function App() {
                 type="text"
                 placeholder="Digite o telefone"
                 id="editUserPhone"
+                value={editUserPhone}
+                onChange={(e) => setEditUserPhone(e.target.value)}
               />
             </Form.Group>
           </Form>
@@ -205,7 +275,7 @@ function App() {
           <Button variant="secondary" onClick={handleCloseEdit}>
             Cancelar
           </Button>
-          <Button variant="primary" onClick={handleCloseEdit}>
+          <Button variant="primary" onClick={updateUser}>
             Salvar
           </Button>
         </Modal.Footer>
