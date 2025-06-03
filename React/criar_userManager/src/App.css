@@ -73,6 +73,10 @@ body {
   cursor: pointer;
 }
 
+.newUser button {
+  height: 40px;
+}
+
 /* ========================== TABELA =============================================== */
 .tableContainer {
   width: 100%;
