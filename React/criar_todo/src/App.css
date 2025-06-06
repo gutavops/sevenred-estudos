@@ -57,12 +57,20 @@ header {
   border-radius: 8px;
   padding: 16px;
   color: var(--gray-100);
+  outline: none;
 }
 
 .newTasks input::placeholder {
   color: var(--gray-300);
 }
 
+input:focus {
+  border: 1px solid var(--purple);
+}
+
+input.filled {
+  border: 1px solid var(--purple);
+}
 .newTasks button {
   background: var(--blue-dark);
   color: var(--gray-100);
@@ -117,9 +125,7 @@ header {
   width: 100%;
   max-width: 736px;
   margin: 24px auto 0;
-  border-top: 1px solid var(--gray-400);
   border-radius: 8px;
-  padding-top: 64px;
 }
 
 .emptyList {
@@ -128,6 +134,9 @@ header {
   align-items: center;
   color: var(--gray-300);
   text-align: center;
+  padding: 64px 16px;
+  border-top: 1px solid var(--gray-400);
+  border-radius: 8px;
 }
 
 .emptyList img {
@@ -144,5 +153,110 @@ header {
 
 .emptyList span {
   font-size: 16px;
+  font-weight: normal;
   color: var(--gray-300);
+} 
+
+/* ========================== Lista =============================================== */
+.taskItems {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+}
+
+.taskItems li {
+  background: var(--gray-500);
+  padding: 16px;
+  border-radius: 8px;
+  color: var(--gray-100);
+  list-style: none;
+}
+
+.task {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--gray-500);
+  padding: 16px;
+  border-radius: 8px;
+  color: var(--gray-100);
+  list-style: none;
+  position: relative;
+}
+
+.task p {
+  flex: 1;
+  color: var(--gray-100);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.task.done p {
+  color: var(--gray-300);
+  text-decoration: line-through;
+}
+
+.task button.delete {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: 2px;
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task .delete {
+  color: var(--gray-300);
+}
+
+.task .delete:hover {
+  color: var(--danger);
+  background-color: var(--gray-400);
+}
+
+/* ==================== BOTÃO DE CHECK ====================== */
+.btnIncomplete,
+.btnComplete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: none;
+}
+
+/* ----------- INCOMPLETA ----------- */
+.btnIncomplete {
+  border: 2px solid var(--blue); /* Borda azul VISÍVEL */
+}
+
+.btnIncomplete svg {
+  opacity: 0; /* Check invisível */
+}
+
+.btnIncomplete:hover {
+  background-color: rgba(78, 168, 222, 0.1); /* Azul com 10% opacidade */
+}
+
+/* ----------- COMPLETA ----------- */
+.btnComplete {
+  border: 1px solid var(--purple-dark); /* Borda roxa */
+  background-color: var(--purple-dark); /* Fundo roxo escuro */
+  color: var(--gray-100); /* Cor do check branca */
+}
+
+.btnComplete svg {
+  opacity: 1; /* Check visível */
+}
+
+.btnComplete:hover {
+  background-color: var(--purple); /* Fundo roxo claro no hover */
+  border-color: var(--purple); /* Borda roxa clara no hover */
 }
