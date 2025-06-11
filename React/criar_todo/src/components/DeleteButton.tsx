@@ -2,10 +2,10 @@ import { TrashIcon } from '@phosphor-icons/react'
 
 interface DeleteButtonProps {
     id: number,
-    onDeleteSuccess: () => Promise<void>
+    getTask: () => Promise<void>
 }
 
-export function DeleteButton({id, onDeleteSuccess}: DeleteButtonProps) {
+export function DeleteButton({id, getTask}: DeleteButtonProps) {
     async function deleteTask() {
         try {
             const response = await fetch(`http://localhost:8000/api/tasks/${id}`, {
@@ -17,7 +17,7 @@ export function DeleteButton({id, onDeleteSuccess}: DeleteButtonProps) {
               }
         
               // Se deletou com sucesso, atualiza a lista
-              await onDeleteSuccess()
+              await getTask()
         } catch (error) {
         console.error('Erro ao deletar tarefa:', error)
         }

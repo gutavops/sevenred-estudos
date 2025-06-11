@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { PlusCircleIcon } from '@phosphor-icons/react'
 
 interface CreateTaskProps {
-    onTaskCreated: () => Promise<void>
+    getTask: () => Promise<void>
   }
 
-export function CreateTask({ onTaskCreated }: CreateTaskProps) {
+export function CreateTask({ getTask }: CreateTaskProps) {
     const [description, setDescription] = useState("")
 
     async function createTask(e: React.FormEvent) {
@@ -25,7 +25,7 @@ export function CreateTask({ onTaskCreated }: CreateTaskProps) {
               }
         
               setDescription("") 
-              await onTaskCreated() 
+              await getTask() 
             } catch (error) {
               console.error("Erro ao criar tarefa:", error)
             }
