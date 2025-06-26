@@ -7,16 +7,17 @@ export async function getUsersService() {
 }
 
 export async function createUserService(newUser: CreateUserDTO) {
-    if(!newUser.cpf || !newUser.email || !newUser.name || !newUser.phone) {
+    if (!newUser.cpf || !newUser.email || !newUser.name || !newUser.phone) {
         throw new ValidationError("Preencha todos os campos obrigatórios.")
     }
+    await validateUser(newUser);
     const userCreated = await prisma.user.create({
         data: {
-            cpf:   newUser.cpf,
+            cpf: newUser.cpf,
             email: newUser.email,
-            name:  newUser.name,
+            name: newUser.name,
             phone: newUser.phone,
-            age:   newUser.age
+            age: newUser.age
         }
     })
 
@@ -24,12 +25,7 @@ export async function createUserService(newUser: CreateUserDTO) {
 }
 
 export async function deleteUserService(id: number) {
-    const existingUser = await prisma.user.findUnique({
-        where: { id: id },
-    });
-    if (!existingUser) {
-        throw new ValidationError("Usuário não encontrado para exclusão.", 404);
-    }
+    await getUserByIDService(id)
     const userDeleted = await prisma.user.delete({
         where: { id: id },
     });
@@ -37,59 +33,12 @@ export async function deleteUserService(id: number) {
 }
 
 export async function updateUserService(id: number, userData: Partial<CreateUserDTO>) {
-    const existingUser = await prisma.user.findUnique({
-        where: { id: id },
-    });
+    await getUserByIDService(id)
 
-    if (!existingUser) {
-        throw new ValidationError("Usuário não encontrado para atualização.", 404);
-    }
-    const errors: string[] = [];
-    // Valida Email se for fornecido no userData
-    if (userData.email !== undefined) {
-        if (userData.email === null || userData.email.trim() === '') {
-            errors.push("O email não pode ser vazio.");
-        } else {
-            const emailExistsForOtherUser = await prisma.user.findUnique({
-                where: { email: userData.email, NOT: { id: id } }, // Exclui o ID do usuário atual
-            });
-            if (emailExistsForOtherUser) {
-                errors.push("Este email já está em uso por outro usuário.");
-            }
-        }
-    }
-    // Valida CPF
-    if (userData.cpf !== undefined) {
-        if (userData.cpf === null || userData.cpf.trim() === '') {
-            errors.push("O CPF não pode ser vazio.");
-        } else {
-            const cpfExistsForOtherUser = await prisma.user.findUnique({
-                where: { cpf: userData.cpf, NOT: { id: id } }, 
-            });
-            if (cpfExistsForOtherUser) {
-                errors.push("Este CPF já está em uso por outro usuário.");
-            }
-        }
-    }
-    // Valida Telefone
-    if (userData.phone !== undefined) {
-        if (userData.phone === null || userData.phone.trim() === '') {
-            errors.push("O telefone não pode ser vazio.");
-        } else {
-            const phoneExistsForOtherUser = await prisma.user.findUnique({
-                where: { phone: userData.phone, NOT: { id: id } }, 
-            });
-            if (phoneExistsForOtherUser) {
-                errors.push("Este telefone já está em uso por outro usuário.");
-            }
-        }
-    }
-    if (errors.length > 0) {
-        throw new ValidationError(errors.join(" "), 400); 
-    }
+    await validateUser(userData, id)
 
     const userUpdated = await prisma.user.update({
-        where: {id: id},
+        where: { id: id },
         data: {
             name: userData.name,
             email: userData.email,
@@ -103,11 +52,60 @@ export async function updateUserService(id: number, userData: Partial<CreateUser
 
 export async function getUserByIDService(id: number) {
     const user = await prisma.user.findUnique({
-        where: {id: id}
+        where: { id: id }
     })
     if (!user) {
         throw new ValidationError('Usuário não encontrado.', 404);
     }
 
     return user;
+}
+
+async function validateUser(userData: Partial<CreateUserDTO>, id?: number) {
+    const errors: string[] = [];
+
+    const usersExists = await prisma.user.findMany({
+        where: {
+            OR: [
+                {
+                    email: userData.email
+                },
+                {
+                    cpf: userData.cpf
+                },
+                {
+                    phone: userData.phone
+                }
+            ],
+            ...(id ? { NOT: { id: id } } : {})
+        }
+    })
+
+    if (userData.email) {
+        const emailIndex = usersExists.findIndex(user => user.email === userData.email)
+
+        if (emailIndex != -1) {
+            errors.push("Este email já está em uso por outro usuário.")
+        }
+    }
+
+    if (userData.cpf) {
+        const cpfIndex = usersExists.findIndex(user => user.cpf === userData.cpf)
+
+        if (cpfIndex != -1) {
+            errors.push("Este CPF já está em uso por outro usuário.")
+        }
+    }
+
+    if (userData.phone) {
+        const phoneIndex = usersExists.findIndex(user => user.phone === userData.phone)
+
+        if (phoneIndex != -1) {
+            errors.push("Este telefone já está em uso por outro usuário.")
+        }
+    }
+
+    if (errors.length > 0) {
+        throw new ValidationError(errors.join(" "), 400);
+    }
 }
