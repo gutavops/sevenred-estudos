@@ -1,0 +1,343 @@
+/* ========================== GERAL =============================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+:root {
+  --gray1: #121214;
+  --gray2: #202024;
+  --gray3: #29292E;
+  --gray4: #323238;
+  --gray5: #7C7C8A;
+  --gray6: #C4C4CC;
+  --gray7: #E1E1E6;
+
+  --white: #FFFFFF;
+
+  --red: #F75A68;
+  --red-dark: #AA2834;
+
+  --green: #00875F;
+  --green-dark: #015F43;
+  --green-light: #00B37E;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: var(--gray2);
+}
+/* ========================== Header =============================================== */
+header {
+  height: 200px;
+  background-color: var(--gray1);
+  padding-top: 40px;
+}
+
+.header-content {
+  width: 100%;
+  max-width: 1120px; 
+  margin: 0 auto; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+}
+
+.header-content h1 {
+  display: flex;
+  align-items: center;
+  gap: 9px; 
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.header-content h1 svg {
+  color: var(--green-light);
+}
+
+.header-content h1 .financeText {
+  color: var(--white);
+}
+
+.new-transaction-button {
+  height: 50px;
+  border: 0;
+  background: var(--green);
+  color: var(--white);
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.new-transaction-button:hover {
+  background: var(--green-light);
+}
+
+/* ========================== Main Container =============================================== */
+.main-container {
+  width: 100%;
+  max-width: 1120px;
+  margin: -80px auto 0; /* Subir o container para cobrir parte do header */
+}
+
+/* ========================== Cards de Resumo =============================================== */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas de tamanho igual */
+  gap: 32px; /* Espaçamento entre os cards */
+}
+
+.summary-card {
+  background: var(--gray4);
+  border-radius: 6px;
+  padding: 24px;
+}
+
+.summary-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none; 
+  height: auto; 
+  padding: 0; 
+}
+
+.summary-card header span {
+  color: var(--gray6);
+}
+
+.summary-card strong {
+  display: block;
+  margin-top: 16px;
+  font-size: 36px;
+  line-height: 160%;
+  color: var(--gray7);
+}
+
+.total-card {
+  background: var(--green-dark); 
+}
+.total-card strong {
+    color: var(--white); 
+}
+
+
+/* ========================== Busca de Transações =============================================== */
+.search-section {
+  display: flex;
+  gap: 16px;
+  margin-top: 64px; 
+}
+
+.search-section input {
+  flex: 1; /* O input ocupa o máximo de espaço possível */
+  border-radius: 6px;
+  border: 0;
+  background: var(--gray1);
+  color: var(--gray5);
+  padding: 16px;
+  font-size: 16px;
+}
+
+.search-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--green);
+  padding: 14px 32px;
+  background: transparent; 
+  color: var(--green);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background: var(--green-light);
+  border-color: var(--green-light);
+  color: var(--white);
+}
+
+/* ========================== Tabela de Transações =============================================== */
+.transactions-table-section {
+  margin-top: 24px; 
+  overflow-x: auto; 
+}
+
+.transactions-table-section table {
+  width: 100%;
+  border-collapse: separate; 
+  border-spacing: 0 8px; 
+}
+
+.transactions-table-section td {
+  padding: 20px 32px;
+  background-color: var(--gray3);
+  color: var(--gray7);
+}
+
+.transactions-table-section td:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  opacity: 0.7;
+}
+.transactions-table-section td:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  text-align: end;
+}
+
+.transactions-table-section .credit {
+  color: var(--green-light); 
+}
+
+.transactions-table-section .debit {
+  color: var(--red); 
+}
+/* ========================== Modal =============================================== */
+
+.modal-content {
+  background-color: var(--gray2);
+  color: var(--white);
+  border-radius: 6px;
+  padding: 24px;
+}
+
+.modal-header, .modal-footer {
+  border: none;
+}
+
+.modal-header {
+  padding: 0;
+  margin-bottom: 32px;
+}
+
+.modal-title {
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+  padding-left: 24px;
+}
+
+.modal-body {
+  padding: 0;
+}
+
+.modal-body form {
+  padding: 0 24px;
+  gap: 16px;
+}
+
+.form-control,
+.form-select {
+  background-color: var(--gray1); 
+  border: none; 
+  color: var(--gray5);
+  border-radius: 6px;
+  padding: 12px 16px; 
+  font-size: 16px; 
+}
+
+.form-control::placeholder{
+  color: var(--gray5); 
+}
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--gray1);
+  color: var(--gray5);
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.btn-group {
+  display: flex; 
+  width: 100%; 
+  gap: 16px; 
+}
+
+.btn-group .btn {
+  flex: 1; 
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-weight: 400;
+}
+
+.btn-success {
+  background-color: var(--gray4);
+  border-radius: 6px;
+  border: none;
+}
+
+.btn-success svg {
+  fill: var(--white);
+}
+
+.btn-outline-secondary {
+  background-color: var(--gray4);
+  border-radius: 6px;
+  border: none;
+  color: var(--white);
+}
+.btn-type.entrada:focus {
+  background-color: var(--green);
+}
+
+.btn-type.entrada:hover {
+  background-color: var(--green);
+}
+.btn-type.entrada:hover svg {
+  fill: var(--white); 
+}
+
+.btn-type.saida:hover {
+  background-color: var(--red-dark);
+}
+.btn-type.saida:hover svg {
+  fill: var(--white); 
+}
+
+.btn-danger svg {
+  fill: var(--white); 
+}
+
+/* Botão "Salvar" */
+.btn-primary {
+  background-color: var(--green);
+  border: none;
+  color: var(--white);
+  width: 100%;
+  padding: 16px 32px;
+}
+
+.btn-primary:hover {
+  background-color: var(--green-light);
+}
+
+/* Altera a cor do botão "X" para branco */
+.btn-close {
+  filter: brightness(0) invert(1); /* transforma o ícone preto em branco */
+}
+
+
+/* ========================== Responsividade (Opcional, mas recomendado) =============================================== */
+@media (max-width: 768px) {
+  .summary-cards {
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
+    overflow-x: auto;
+  }
+}
