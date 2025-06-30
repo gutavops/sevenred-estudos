@@ -283,7 +283,7 @@ header {
   border: none;
 }
 
-.btn-success svg {
+.btn-success:focus svg {
   fill: var(--white);
 }
 
