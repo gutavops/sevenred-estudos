@@ -182,13 +182,13 @@ A API expõe os seguintes endpoints sob a base `/api/finance`:
 * **Resposta de Erro (400 Bad Request):**
     ```json
     {
-      "message": "Preencha todos os campos obrigatórios."
-    }
-    ```
-    ou
-    ```json
-    {
-      "message": "O tipo da transação deve ser 'c' para crédito ou 'd' para débito."
+      "message": [
+        "Categoria é obrigatória.",
+        "Descrição é obrigatório.",
+        "Preço é obrigatório.",
+        "Tipo é obrigatório.",
+        "O tipo da transação deve ser 'c' para crédito ou 'd' para débito."
+      ]
     }
     ```
 
