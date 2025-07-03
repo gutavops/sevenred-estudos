@@ -1,14 +1,14 @@
-import { Decimal } from "@prisma/client/runtime/library";
 import prisma from "../db/prisma";
-import { CreateTransactionDTO } from "../dto/transactionDTO";
+import { CreateTransactionDTO, TransactionsResponse } from "../dto/transactionDTO";
 import { ValidationError } from "../errors/ValidationError"
 
 export async function createTransactionService(newTransaction: CreateTransactionDTO) {
-    if(!newTransaction.description || !newTransaction.price || !newTransaction.category || !newTransaction.type) {
-        throw new ValidationError("Preencha todos os campos obrigatórios.")
-    }
-    if (newTransaction.type !== 'c' && newTransaction.type !== 'd') {
-        throw new ValidationError("O tipo da transação deve ser 'c' para crédito ou 'd' para débito.");
+    let errors: string[] = []
+
+    validationCreateTransaction(newTransaction, errors)
+
+    if (errors.length > 0) {
+        throw new ValidationError(errors.join(' '), 400)
     }
     const transactionCreated = await prisma.transaction.create({
         data: {
@@ -35,24 +35,6 @@ export async function deleteTransactionService(id: number) {
     return transactionDeleted;
 }
 
-interface TransactionSummary {
-    total: number
-    credit: number
-    debit: number
-}
-
-interface TransactionsResponse {
-    summary: TransactionSummary;
-    transactions: {
-        id: number
-        price: Decimal
-        description: string
-        category: string
-        type: string
-        createdAt: Date
-    }[]; 
-}
-
 export async function getTransactionsService(): Promise<TransactionsResponse> {
     const transactions = await prisma.transaction.findMany()
 
@@ -76,5 +58,22 @@ export async function getTransactionsService(): Promise<TransactionsResponse> {
             debit
         },
         transactions
+    }
+}
+
+function validationCreateTransaction(dto: CreateTransactionDTO, errors: string[]) {
+    const requiredFields = [
+        { field: dto.category, message: "Categoria é obrigatória." },
+        { field: dto.description, message: "Descrição é obrigatório." },
+        { field: dto.price, message: "Preço é obrigatório." },
+        { field: dto.type, message: "Tipo é obrigatório." }
+    ]
+
+    requiredFields.forEach(({ field, message }) => {
+        if(field === null || field === undefined || (typeof field === "string" && field.trim() === "")) errors.push(message)
+    })
+
+    if(!['c', 'd'].includes(dto.type)) {
+        errors.push("O tipo da transação deve ser 'c' para crédito ou 'd' para débito.")
     }
 }

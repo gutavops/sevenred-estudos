@@ -73,3 +73,4 @@ Para obter instruções detalhadas sobre como instalar e executar o frontend e o
 ## Possíveis Melhorias ou Limitações
 
 * **Usuários:** Atualmente, o aplicativo não possui um sistema de usuários,a implementação de usuários permitiria que diferentes pessoas utilizem o aplicativo e gerenciem suas próprias finanças de forma isolada.
+* **Paginação e Filtragem Avançada:** Implementar paginação para listagens de transações e opções de filtragem mais complexas (por data, por valor, etc.).
