@@ -4,13 +4,13 @@ Este diretório contém o código-fonte da interface do usuário (frontend) da a
 
 ## Visão Geral
 
-O frontend é a parte da aplicação com a qual o usuário interage diretamente. Ele exibe um resumo financeiro, uma lista de transações, permite a criação de novas transações e a busca por transações existentes. A comunicação com o backend é feita através de requisições HTTP.
+O frontend é a parte da aplicação com a qual o usuário interage diretamente. Ele exibe um resumo financeiro, uma lista de transações, permite a criação de novas transações, a busca por transações existentes e a exclusão de transações. A comunicação com o backend é feita através de requisições HTTP.
 
 ## Tecnologias Utilizadas
 
-* **React**: Biblioteca JavaScript para construção de interfaces de usuário.
-
 * **Vite**: Ferramenta de build rápida para projetos web modernos.
+
+* **React**: Biblioteca JavaScript para construção de interfaces de usuário.
 
 * **TypeScript**: Superconjunto tipado de JavaScript, para maior robustez do código.
 
@@ -32,7 +32,7 @@ A interface do usuário oferece as seguintes funcionalidades:
 
   * Descrição
 
-  * Valor (Preço)
+  * Preço (Valor)
 
   * Categoria (seleção pré-definida)
 
@@ -49,7 +49,7 @@ A interface do usuário oferece as seguintes funcionalidades:
 A estrutura do diretório `frontend/src` é organizada da seguinte forma:
 
 ```
-frontend/
+finance-app/
 ├── src/
 │   ├── App.tsx                 # Componente principal da aplicação, orquestra os demais.
 │   ├── App.css                 # Estilos CSS globais da aplicação.
@@ -71,7 +71,7 @@ frontend/
 
 ## Instalação
 
-Para instalar as dependências do frontend, navegue até o diretório `frontend/` no seu terminal e execute:
+Para instalar as dependências do frontend, navegue até o diretório `finance-app/` no seu terminal e execute:
 
 ```bash
 npm install
@@ -98,7 +98,3 @@ Certifique-se de que o [backend](./backend/README.md) esteja em execução antes
 ## Estilização
 
 A estilização da aplicação é feita utilizando um arquivo CSS customizado (`App.css`) que define variáveis de cores e estilos para os componentes, além da integração com o Bootstrap para componentes de UI e responsividade.
-
-## Possíveis Melhorias
-
-* **Paginação e Filtragem Avançada:** Implementar paginação para listagens de transações e opções de filtragem mais complexas (por data, por valor, etc.).
