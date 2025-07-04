@@ -6,6 +6,8 @@ Este diretório contém o código-fonte da interface do usuário (frontend) da a
 
 O frontend é a parte da aplicação com a qual o usuário interage diretamente. Ele exibe um resumo financeiro, uma lista de transações, permite a criação de novas transações, a busca por transações existentes e a exclusão de transações. A comunicação com o backend é feita através de requisições HTTP.
 
+Você pode visualizar o design das telas no Figma através deste link: [Figma Finance App](https://www.figma.com/design/h2TRwhZ5i5uRqtTFnQwf3h/Finance?node-id=0-1&p=f&t=ykHK93AvYuiMOUuS-0).
+
 ## Tecnologias Utilizadas
 
 * **Vite**: Ferramenta de build rápida para projetos web modernos.
