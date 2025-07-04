@@ -42,7 +42,7 @@ export function TransactionsTable({ transactions, searchTerm, onDeleteSuccess }:
 
     const handleDeleteTransaction = async (id: string) => {
         try {
-          await axios.delete(`http://localhost:3101/api/finance/${id}`);
+          await axios.delete(`http://localhost:3101/api/transaction/${id}`);
           onDeleteSuccess(); // Atualiza a lista depois de deletar
         } catch (error) {
           console.error("Erro ao deletar transação:", error);

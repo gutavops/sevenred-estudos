@@ -29,7 +29,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-    const response = await axios.get<{ transactions: Transaction[], summary: SummaryData }>('http://localhost:3101/api/finance')
+    const response = await axios.get<{ transactions: Transaction[], summary: SummaryData }>('http://localhost:3101/api/transaction')
     setTransactions(response.data.transactions)
     setSummaryData(response.data.summary)
     } catch (error) {
