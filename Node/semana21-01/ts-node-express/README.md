@@ -35,7 +35,7 @@ Para rodar a aplicação localmente, siga os passos abaixo:
 1.  **Clone o repositório:**
 
     ```bash
-    git clone <URL_DO_SEU_REPOSITORIO>
+    git clone https://github.com/gutavops/sevenred-estudos/tree/bfea899e4cf78e0ba4d4fcfa320a9b38f02ddb5b/Node/semana21-01/ts-node-express
     cd ts-node-express
     ```
 
