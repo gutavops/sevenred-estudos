@@ -149,4 +149,3 @@ Durante o desenvolvimento deste projeto, diversos problemas foram encontrados e 
 * **Solução:** Foram adicionadas classes do Tailwind CSS aos botões em `UserTable.tsx`:
     * `hover:bg-yellow-600` e `hover:bg-red-700`: Para alterar a cor de fundo no hover.
     * `cursor-pointer`: Para mudar o ícone do cursor para uma "mãozinha".
-    * `transition-colors duration-200`: Para uma transição suave das cores, melhorando a experiência visual.
