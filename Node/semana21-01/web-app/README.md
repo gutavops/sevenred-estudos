@@ -31,8 +31,8 @@ Para executar a aplicação em seu ambiente local, siga os passos abaixo:
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [LINK_DO_SEU_REPOSITORIO]
-    cd [NOME_DA_PASTA_DO_PROJETO]
+    git clone https://github.com/gutavops/sevenred-estudos/tree/main/Node/semana21-01/web-app
+    cd web-app
     ```
 
 2.  **Instale as dependências:**
