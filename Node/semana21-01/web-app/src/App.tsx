@@ -18,6 +18,7 @@ function App() {
   });
   const [showModal, setShowModal] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [newFormKey, setNewFormKey] = useState(Date.now());
 
   useEffect(() => {
     try {
@@ -56,6 +57,7 @@ function App() {
         className="bg-green-600 text-white px-4 py-2 rounded"
         onClick={() => {
           setEditingUser(null);
+          setNewFormKey(Date.now());
           setShowModal(true);
         }}
       >
@@ -64,7 +66,7 @@ function App() {
 
       <UserTable users={users} onEdit={handleEdit} onDelete={handleDelete} />
       <UserFormModal
-        key={editingUser ? editingUser.id : 'new-user'}
+        key={editingUser ? editingUser.id : newFormKey}
         isOpen={showModal}
         onClose={() => {
           setShowModal(false)

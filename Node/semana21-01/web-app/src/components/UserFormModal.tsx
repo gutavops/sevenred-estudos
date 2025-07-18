@@ -11,7 +11,7 @@ interface Props {
 export function UserFormModal({ isOpen, onClose, onSave, editingUser }: Props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [idade, setIdade] = useState<number>();
+  const [idade, setIdade] = useState<number | null>(null);
   const [telefone, setTelefone] = useState("");
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export function UserFormModal({ isOpen, onClose, onSave, editingUser }: Props) {
     } else {
       setName("");
       setEmail("");
-      setIdade(undefined);
+      setIdade(null);
       setTelefone("");
     }
   }, [editingUser]);
@@ -63,19 +63,8 @@ export function UserFormModal({ isOpen, onClose, onSave, editingUser }: Props) {
           className="w-full border p-2 mb-4"
           placeholder="Idade"
           value={idade ?? ""}
-          onChange={(e) => {
-            const val = e.target.value;
-
-            if (val === ""){
-              setIdade(undefined);
-              return;
-            }
-
-            const num = Number(val);
-            if (!isNaN(num)) {
-              setIdade(num)
-            }
-          }}
+          type="number"
+          onChange={(e) => setIdade(Number(e.target.value))}
         />
         <input
           className="w-full border p-2 mb-4"

@@ -72,21 +72,55 @@ Durante o desenvolvimento deste projeto, diversos problemas foram encontrados e 
 
 ### 3. Tratamento do Campo "Idade" no Formulário
 
-* **Problema:** O campo "Idade" gerava dois tipos de erros no console ao digitar:
-    * `Uncontrolled -> Controlled warning`: O input iniciava sem controle (`idade` era `undefined`) e se tornava controlado ao digitar, causando um alerta do React.
-    * Erro ao digitar letras (`Received NaN for the value attribute`): A conversão para `Number(e.target.value)` com valores não numéricos resultava em `NaN`, que não é aceito pelo atributo `value` do input.
-* **Solução:** O `onChange` e o `value` do input "Idade" foram ajustados em `UserFormModal.tsx`:
-    * `value={idade ?? ""}`: Garante que o input seja sempre controlado, exibindo uma string vazia se `idade` for `undefined`.
-    * A lógica no `onChange` foi aprimorada para:
-        * Resetar `idade` para `undefined` se o campo for esvaziado.
-        * Converter para número e chamar `setIdade` somente se o valor for um número válido (`!isNaN(num)`).
-* **Benefícios:** Mantém o input sempre controlado, evita `NaN` no estado, permite apagar o campo sem erros, e mantém a tipagem `number | undefined` do estado de forma robusta.
+* **Problema Original:** O campo "Idade" do formulário gerava dois tipos de problemas no console ao digitar:
+    * `Uncontrolled -> Controlled warning`: O input iniciava sem controle (pois o estado `idade` era `undefined` no início) e se tornava controlado apenas quando o usuário digitava algo, gerando um alerta do React.
+    * `Erro ao digitar letras (Received NaN for the value attribute)`: A conversão para `Number(e.target.value)` com valores não numéricos (como "abc") resultava em `NaN`. O React não aceita `NaN` como valor para o atributo `value` de um input controlado, o que causava o erro e travava o campo.
 
-### 4. Reset de Campos da Modal ao Abrir para Novo Usuário
+* **Causa Raiz do Problema Original:** Esses problemas aconteciam porque o estado `idade` era inicialmente `undefined` e o valor do input era atribuído diretamente sem tratamento para `undefined` ou para entradas não numéricas que resultassem em `NaN`.
 
-* **Problema:** Após editar um usuário, ao clicar em "Novo Usuário", os campos da modal (`UserFormModal`) ainda mostravam os dados do usuário editado, em vez de estarem vazios.
-* **Causa Raiz:** Embora o `useEffect` da modal estivesse configurado para limpar os campos quando `editingUser` fosse `null`, o React, em sua otimização de re-renderização, muitas vezes reutiliza instâncias de componentes, e os `useState`s internos da modal não eram completamente reinicializados em todas as situações.
-* **Solução:** Foi adicionada uma propriedade `key` ao componente `UserFormModal` em `App.tsx`. A `key` é dinâmica: `key={editingUser ? editingUser.id : 'new-user'}`. Essa mudança na `key` força o React a desmontar a instância anterior da modal e montar uma nova, garantindo que todos os `useState`s internos sejam inicializados do zero, resultando em campos limpos para um novo usuário.
+* **Solução Aplicada (Atual no Código):** Para abordar esses problemas e melhorar o controle do campo, as seguintes alterações foram feitas no `UserFormModal.tsx` para o input de idade:
+    * **Estado:** O estado `idade` foi modificado para aceitar `null` como um valor válido para representar a ausência de um número: `const [idade, setIdade] = useState<number | null>(null);`. No `useEffect` de reset, `setIdade(null)` é usado para limpar.
+    * **Atributo `value`:** O `value` do input foi ajustado para `value={idade ?? ""}`. Isso garante que o input sempre receba uma string (vazia se `idade` for `null`), mantendo-o como um componente controlado.
+    * **Atributo `type`:** O atributo `type="number"` foi adicionado ao input. Isso instrui o navegador a exibir controles numéricos (como setas) e a restringir a digitação a caracteres numéricos, melhorando a experiência do usuário.
+
+### 4. Modal "Novo Usuário" Vem Preenchida Após Criação de Usuário
+
+* **Problema:** Após criar um usuário com sucesso, ao clicar novamente no botão "Novo Usuário", a modal `UserFormModal` abria com os campos preenchidos com os dados do usuário recém-criado, em vez de vir completamente vazia. Curiosamente, se um usuário fosse editado (abrindo e fechando a modal no modo de edição) antes de abrir a modal para um novo usuário, os campos vinham vazios corretamente.
+
+* **Causa Raiz:** Este comportamento está relacionado à forma como o React otimiza a renderização de componentes usando a propriedade `key`.
+    * A `key` do `UserFormModal` era `key={editingUser ? editingUser.id : 'new-user'}`.
+    * Quando criava um usuário e clicava em "Novo Usuário" novamente, `editingUser` permanecia `null`, o que fazia com que a `key` fosse sempre a mesma string estática: `'new-user'`.
+    * Como a `key` não mudava, o React interpretava que era a *mesma instância* do componente `UserFormModal` e, por otimização, não a desmontava e remontava completamente. Isso permitia que o estado interno do `UserFormModal` (os `useState`s dos campos `name`, `email`, `idade`, `telefone`) retivesse os valores da criação anterior, mesmo com o `useEffect` tentando redefini-los.
+    * No cenário de "editar e depois novo", a `key` mudava de um `id` do usuário para `'new-user'`, forçando o React a remontar o componente, o que garantia um estado limpo.
+
+* **Solução Aplicada:** Para garantir que a modal de "Novo Usuário" sempre inicie com os campos limpos, a `key` do `UserFormModal` foi modificada para ser sempre única ao criar um novo usuário.
+    * **Adição de um novo estado em `App.tsx`:**
+        ```typescript
+        const [newFormKey, setNewFormKey] = useState(Date.now());
+        ```
+        Este estado armazena um valor único que será usado como `key` para a modal no modo "Novo Usuário".
+    * **Atualização da `key` no botão "Novo Usuário":**
+        No `onClick` do botão "Novo Usuário", `setNewFormKey(Date.now())` foi adicionado. Isso garante que cada vez que o botão é clicado, uma nova `key` única é gerada.
+        ```typescript
+        <button
+          className="bg-green-600 text-white px-4 py-2 rounded"
+          onClick={() => {
+            setEditingUser(null);
+            setNewFormKey(Date.now()); // Gera uma nova key para cada clique
+            setShowModal(true);
+          }}
+        >
+          Novo Usuário
+        </button>
+        ```
+    * **Ajuste da `key` no `UserFormModal`:**
+        A propriedade `key` do `UserFormModal` foi atualizada para usar este novo estado:
+        ```typescript
+        <UserFormModal
+          key={editingUser ? editingUser.id : newFormKey} // Usa o id do usuário ou a nova key única
+          // ... outras props
+        />
+        ```
 
 ### 5. Dados do `localStorage` Zerando ao Recarregar a Página
 
