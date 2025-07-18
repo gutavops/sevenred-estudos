@@ -85,11 +85,21 @@ function validationCreateTransaction(dto: CreateTransactionDTO, errors: string[]
     ]
 
     requiredFields.forEach(({ field, message }) => {
-        if (field === null || field === undefined) errors.push(message)
+        if (field === null || field === undefined) {
+            errors.push(message)
+        } else if (typeof field === "string" && field.trim() === "") {
+            errors.push(`${message} Não pode ser vazio.`)
+        }
     })
 
     if (!["C", "D"].includes(dto.type)) {
         errors.push("Tipo precisa ser 'D' ou 'C'.")
+    }
+
+    if (dto.price !== null && dto.price !== undefined) {
+        if (typeof dto.price !== "number" || dto.price === 0) {
+            errors.push("Preço deve ser maior que 0.")
+        }
     }
 }
 

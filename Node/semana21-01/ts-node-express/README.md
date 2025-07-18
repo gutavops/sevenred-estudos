@@ -208,3 +208,38 @@ A funcionalidade esperada era "Retornar dados das transações com resumo *por u
 1.  **Adicionado o filtro `where: { userId: userId }`** à query `prisma.transaction.findMany()`.
 
 2.  **Corrigida a lógica de soma** para `credit += transaction.price.toNumber()` e `debit += transaction.price.toNumber()`, removendo a adição duplicada do valor acumulado.
+
+---
+
+### Erro 8: Validação Incompleta - Campos Obrigatórios Aceitando Strings Vazias e Erro de Unicidade em CPF Vazio
+
+**Localização:** `src/service/userService.ts` (funções `createUserService` e `validateUser`)
+
+**Descrição do Problema:**
+1.  Ao tentar criar um usuário com campos obrigatórios como `name`, `email`, `phone` como strings vazias (`""`), a aplicação permitia a criação e se o campo do `cpf` fosse enviado como string vazia retornava um erro de banco de dados (`Unique constraint failed on the fields: (cpf)` para CPF vazio), em vez de uma mensagem de validação amigável.
+2.  A regra de negócio é que apenas `age` é opcional; os demais campos devem ser preenchidos.
+
+**Análise e Identificação:**
+O problema residia na função `validateUser`, que não verificava se os campos obrigatórios eram strings vazias ou estavam ausentes. Isso permitia que dados inválidos chegassem ao Prisma e ao banco de dados, causando erros de constraint.
+
+**Solução Aplicada:**
+**Adicionadas validações explícitas na função `validateUser`** para os campos `name`, `email`, `cpf` e `phone`, garantindo que eles não sejam nulos, indefinidos ou strings vazias (após `trim()`). Essas validações agora ocorrem antes das verificações de unicidade, fornecendo feedback imediato e amigável ao usuário.
+
+---
+
+### Erro 9: Validação Incompleta na Criação de Transações - `price` Zero e Campos Obrigatórios Vazios (Solução Refinada)
+
+**Localização:** `src/service/transactionService.ts` (função `validationCreateTransaction`)
+
+**Descrição do Problema:**
+Ao tentar criar uma transação via `POST /api/transactions`, a aplicação permitia:
+1.  Que o campo `price` fosse `0`.
+2.  Que os campos obrigatórios `category` e `description` fossem strings vazias (`""`).
+Isso resultava na criação de transações com dados inválidos, violando as regras de negócio. A função de validação existente não cobria essas condições de forma completa.
+
+**Análise e Identificação:**
+A função `validationCreateTransaction` já possuía uma estrutura para verificar campos nulos/indefinidos. O problema era a falta de verificação para strings vazias para campos de texto obrigatórios e para a condição de `price` ser um número positivo.
+
+**Solução Aplicada:**
+1.  **Strings vazias:** Para campos do tipo `string`, a condição foi estendida para incluir `field.trim() === ""`, garantindo que strings vazias sejam tratadas como inválidas.
+2.  **`price` positivo:** Adicionada uma verificação específica para garantir que `dto.price` seja um `number` e maior que `0`.

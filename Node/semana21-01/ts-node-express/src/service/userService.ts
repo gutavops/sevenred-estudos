@@ -74,6 +74,20 @@ export async function getUserByIDService(id: string) {
 async function validateUser(userData: Partial<CreateUserDTO>, id?: string) {
     const errors: string[] = [];
 
+    // Validação para campos obrigatórios não serem nulos, indefinidos ou strings vazias
+    if (!userData.name || userData.name.trim() === '') {
+        errors.push("Nome é obrigatório.");
+    }
+    if (!userData.email || userData.email.trim() === '') {
+        errors.push("Email é obrigatório.");
+    }
+    if (!userData.cpf || userData.cpf.trim() === '') {
+        errors.push("CPF é obrigatório.");
+    }
+    if (!userData.phone || userData.phone.trim() === '') {
+        errors.push("Telefone é obrigatório.");
+    }
+
     const usersExists = await prisma.user.findMany({
         where: {
             OR: [
